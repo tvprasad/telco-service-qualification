@@ -1,0 +1,44 @@
+.esriPopup.noir .actionsPane
+{
+	padding: 2px 10px 4px 10px;
+	background-color: #444444;
+	border-radius: 0px 0px 5px 5px;
+	-moz-border-radius: 0px 0px 5px 5px;
+	-webkit-border-radius: 0px 0px 5px 5px;
+	-o-border-radius: 0px 0px 5px 5px;
+	border: 0;
+	border-top: none;
+}
+
+.esriPopup.noir .pointer, .esriPopup.noir .outerPointer {
+    background-image: url(../images/popup.png);
+}
+
+.esriPopup.noir .titleButton, .esriPopup.noir .pointer, .esriPopup.noir .esriViewPopup .gallery .mediaHandle, .esriPopup.noir .esriViewPopup .gallery .mediaIcon {
+    background-image: url(../images/popup.png);
+}
+
+.esriPopup.noir .titleButton.maximize {
+    top: 8px;
+	display: none;
+}
+
+.esriPopup.noir .titleButton.restore {
+    top: 8px;
+	display: none;
+}
+
+.esriPopup.noir .contentPane {
+    background: #444444;
+    padding: 10px;
+    color: #d5d5d5;
+    font-size: 12px;
+    line-height: 16px;
+	border: 0;
+	overflow: auto;
+}
+
+.esriPopup.noir .actionList {
+    display: none;
+}
+

@@ -1,4 +1,4 @@
-# telco-service-qualification
+﻿# telco-service-qualification
 
 Service qualification for determining optimal routes to use when building out network infrastructure to new potential customer locations
 
@@ -11,23 +11,28 @@ Service qualification for determining optimal routes to use when building out ne
                                      
 ## Instructions
 
+1. Fork and then clone the repo. 
+2. Run and try the samples
+
 ### Esri Sample Data
 
 Esri's sample data can be [downloaded] (INSERT LINK TO DOWNLOAD) with this repository to extend the application.
 
-### Your Services
-
-[Detailed help](<INSERT LINK>)
-on the ArcGIS Resource Center can guide you in the setup and configuration of this application with your data.
 
 ### General Help
+
 [New to Github? Get started here.](http://htmlpreview.github.com/?https://github.com/Esri/esri.github.com/blob/master/help/esri-getting-to-know-github.html)
 
 ## Requirements
 
-* Text Editor
+
+* Notepad or your favorite HTML editor
+* Web browser with access to the Intern* Text Editor
 
 ## Resources
+
+[Detailed help](<INSERT LINK>)
+on the ArcGIS Resource Center can guide you in the setup and configuration of this application with your data.
 
 Learn more about ArcGIS for Telecommunications Maps and App's [ArcGIS for Telecommunications Maps and App's](<INSERT LINK>).
 
@@ -89,3 +94,5 @@ limitations under the License.
 
 Please do not contribute code you did not write yourself, unless you are certain you have the legal ability to do so. Also ensure all code contributed can be licensed under the Apache License 2.0.
 
+[](Esri Tags: Telecommunications Utilities)
+[](Esri Language: JavaScript)​

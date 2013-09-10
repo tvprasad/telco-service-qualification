@@ -19,20 +19,21 @@
 
 var config = 
 {
-	proxyURL: "http://alba.esri.com/proxy/proxy.ashx",
-
-	portalID: "http://telecomrc.maps.arcgis.com/",
-
-	appId: "33uUL6Rj4QNesVkk",
-	webMapOwner: "telecom_gis",
-	webMapTag: "ServiceQualification.Fiber",
-	basemapsGroupOwner: "telecom_gis",
-	basemapsGroupTag: "ServiceQualification.Basemaps",
-	businessesLayerWebMapTag: "ServiceQualification.Businesses",
-	accessPointsLayerWebMapTag: "ServiceQualification.AccessPoint",
+	// This application requires a proxy in order to function.
+	// Download and deploy the appropriate proxy configuration 
+	// from https://developers.arcgis.com/en/javascript/jshelp/ags_proxy.html
+	proxyURL: "<your proxy URL>",
+	
+	portalID: "<your portal URL>",
+	appId: "<your application ID>",
+	webMapOwner: "<web map owner>",
+	webMapTag: "<web map tag>",
+	basemapsGroupOwner: "<basemaps group owner>",
+	basemapsGroupTag: "<basemaps group>",
+	businessesLayerWebMapTag: "<business layer web map tag>",
+	accessPointsLayerWebMapTag: "<access points web map tag>",
 	
 	routeLengthLabelUnits: "Feet",
-	
 	/* one of 	UNIT_STATUTE_MILE, 
 				UNIT_FOOT, 
 				UNIT_KILOMETER, 
@@ -52,7 +53,7 @@ var config =
 	defaultCutoff: 25000000,
 	impedenceAttribute: "LengthToBusinessRatio",
 	attributeName: "LengthToBusinessRatio",
-	parameterName: "K Factor",
+	parameterName: "Business Influence",
 	closestFacilityURL: "http://telecom.esri.com/arcgis/rest/services/ServiceQualification/NA/NAServer/Closest Facility"
 	
 };

@@ -51,9 +51,10 @@ var mapClickHandle;
 // Initialize the application
 dojo.addOnLoad(oAuth);
 
-
 function oAuth(){
 	try{
+		dojo.style("loader", "display", "block");
+		
 		esri.config.defaults.io.proxyUrl = config.proxyURL;
 		esri.config.defaults.io.alwaysUseProxy = false;	
 		esri.arcgis.utils.arcgisUrl = config.portalID + "sharing/content/items";	
@@ -62,7 +63,7 @@ function oAuth(){
 			appId:      config.appId,
 			portal:     config.portalID,
 			expiration: (14 * 24 * 60), // 2 weeks, in minutes
-			popup:      true
+			popup:      false
 		});	
 				  
 		if (OAuthHelper.isSignedIn()) {
@@ -88,6 +89,7 @@ function oAuth(){
 		}
 	}
 	catch(err){
+		dojo.style("loader", "display", "none");
 		console.log("Error on Portal Sign In");
 		console.log(err.message);
 	}
@@ -119,6 +121,7 @@ function findWebMap(webMapTag,webMapOwner){
 		return deferred;
 	}
 	catch(err){
+		dojo.style("loader", "display", "none");
 		console.log("Error finding web map with tag: " + webMapTag);
 		console.log(err.message);
 	}		
@@ -149,6 +152,7 @@ function findGroupWithTag(groupTag,groupOwner){
 		return deferred;
 	}
 	catch(err){
+		dojo.style("loader", "display", "none");
 		console.log("Error finding group with tag: " + groupTag);
 		console.log(err.message);
 	}		
@@ -192,6 +196,7 @@ function findOperationalLayersWithTag(tag){
 		return deferred;
 	}
 	catch(err){
+		dojo.style("loader", "display", "none");
 		console.log("Error finding operational layer");
 		console.log(err.message);
 	}	
@@ -302,24 +307,25 @@ function init(webMapID){
 						map.addLayer(newLyr,0);	
 						dojo.byId("panelBasemap").innerHTML = basemaps[0].title;			
 					});			
-				}		
+				}	
+				dojo.style("loader", "display", "none");
 			});
 			
 			//resize the map when the browser resizes
 			dojo.connect(dijit.byId('map'), 'resize', map,map.resize);
 						
 			// Initialize geocoding capability
-			initGeocoder();
+			initGeocoder();			
 		}); 
 		
 		mapDeferred.addErrback(function(error) {
-			//alert(dojo.toJson(error));
-			//console.log("Map creation failed: ", dojo.toJson(error));
+			dojo.style("loader", "display", "none");
 			console.log("Map creation failed: ", error.message);
 	//		window.location = "http://www.esri.com";
 		});		
 	}
 	catch(err){
+		dojo.style("loader", "display", "none");
 		console.log("Error opening web map...");
 		console.log(err.message);
 	}		
@@ -336,16 +342,16 @@ function initGeocoder(){
 			url: config.geocodeURL,
 			name: "Esri World Geocoder",
 			placeholder: "Find a place",
-			sourceCountry: "USA" // limit search to the United States
+			sourceCountry: config.geocodeSourceCountry // limit search to the United States
 		  },
-		  autoComplete: true
+		  autoComplete: config.geocodeAutoComplete
 		}, "search-input");
 		geocoder.startup();
 		geocoder.focus();		
 
 		dojo.connect(geocoder, "onFindResults", onFindResultsComplete);	
 		dojo.connect(geocoder, "onSelect", onSelectComplete);	
-		dojo.connect(geocoder, "onClear", onClearGeocode);
+		dojo.connect(geocoder, "onClear", onClearGeocode);		
 	}
 	catch(err){
 		console.log("Error creating geocoder...");
@@ -504,7 +510,7 @@ function clearRoute() {
 }
 
 // ROUTE DETERMINATION
-function setBusinessInfluenceFactor(){
+function setKFactor(){
 	dojo.byId('businessInfluenceVal').value = dojo.number.round(dijit.byId('businessInfluenceSlider').value);
 }
 

@@ -567,7 +567,7 @@ function solveNetworkRoute(facilityFeatures){
 		params.returnRoutes = true;
 		params.returnDirections = false;
 		params.defaultTargetFacilityCount=1;
-		params.impedenceAttribute = config.impedenceAttribute;
+		params.impedenceAttribute = config.impedanceAttribute;
 
 		var attributeParameterValues = [];
 		kfactor = dojo.number.round(dijit.byId('businessInfluenceSlider').value); 

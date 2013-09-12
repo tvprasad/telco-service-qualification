@@ -50,11 +50,10 @@ var config =
 	geocodeURL: "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
 
 	// Network Analyst Configuration
-	defaultCutoff: 25000000,
-	impedenceAttribute: "LengthToBusinessRatio",
+	closestFacilityURL: "http://telecom.esri.com/arcgis/rest/services/ServiceQualification/NA/NAServer/Closest Facility",
+	impedanceAttribute: "LengthToBusinessRatio",
 	attributeName: "LengthToBusinessRatio",
 	parameterName: "Business Influence",
-	closestFacilityURL: "http://telecom.esri.com/arcgis/rest/services/ServiceQualification/NA/NAServer/Closest Facility"
-	
+	defaultCutoff: 25000000
 };
 

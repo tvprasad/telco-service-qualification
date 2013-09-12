@@ -1,6 +1,6 @@
 <!--
  |
- | Copyright 2012 Esri
+ | Copyright 2013 Esri
  |
  | Licensed under the Apache License, Version 2.0 (the "License");
  | you may not use this file except in compliance with the License.
@@ -53,6 +53,7 @@
 	<!-- Supporting Javascript Files -->
 	<script type="text/javascript" src="javascript/config.js"></script>
 	<script type="text/javascript" src="javascript/app.js"></script>
+	<script type="text/javascript" src="javascript/portal.js"></script>
 	
 	
 	<script type="text/javascript">
@@ -117,15 +118,10 @@
 						<!--input id="search-input" placeholder="Search" type="text" onkeydown="searchKeydown(event);"-->
 						<button id="search-button" onclick="mapClickLocate();"></button>
 					</div>
-					<!--div class="subtitle">Distance</div>
-					<div id="panelDistance" class="dist0" onclick="setDistance(event)"></div-->
 					<div id='ControlPanel'>
 						<div id="panelListSubTitle" class="panelListSubTitle">Find Nearest</div>
 						<div id="panelListTitle" class="panelListTitle">
-							<!--select id="findType" onChange="findTypeChange(this)" data-dojo-type="dijit.form.Select"-->
 							<select id="findType" data-dojo-type="dijit.form.Select">
-								<!--option value="Patch Panel">Patch Panel</option>
-								<option value="Splice Closure">Splice Closure</option-->
 							</select>
 						</div>
 						<div id='businessInfluenceText'>Business Influence:</div>
@@ -141,7 +137,6 @@
 			</div>
 			
 			<!-- Panel Results -->
-			<!--div id="panelResults" class="scroll-pane"-->
 			<div id="panelResults" class="scroll-pane">
 			
 				<div id="panelSignal" class="panelResultsTab">

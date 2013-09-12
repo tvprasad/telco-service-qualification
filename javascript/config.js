@@ -1,6 +1,6 @@
 /*
  |
- | Copyright 2012 Esri
+ | Copyright 2013 Esri
  |
  | Licensed under the Apache License, Version 2.0 (the "License");
  | you may not use this file except in compliance with the License.
@@ -48,6 +48,8 @@ var config =
 	
 	geometryUrl: "http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer", 
 	geocodeURL: "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
+	geocodeSourceCountry: "USA",
+	geocodeAutoComplete: true,	
 
 	// Network Analyst Configuration
 	closestFacilityURL: "http://telecom.esri.com/arcgis/rest/services/ServiceQualification/NA/NAServer/Closest Facility",

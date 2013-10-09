@@ -12,7 +12,7 @@ function(lang, dojoJson, Url, cookie, Deferred, ioquery, idManager) {
   
   var OAuthHelper = {
     
-    portal: "http://telecomrc.maps.arcgis.com/",
+    portal: "http://www.arcgis.com/",
     
     popupCallbackPage: window.location.protocol + "//" + 
                        window.location.host + 

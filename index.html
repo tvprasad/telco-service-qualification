@@ -1,163 +1,178 @@
-﻿<!--
- |
- | Copyright 2013 Esri
- |
- | Licensed under the Apache License, Version 2.0 (the "License");
- | you may not use this file except in compliance with the License.
- | You may obtain a copy of the License at
- |
- |    http://www.apache.org/licenses/LICENSE-2.0
- |
- | Unless required by applicable law or agreed to in writing, software
- | distributed under the License is distributed on an "AS IS" BASIS,
- | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- | See the License for the specific language governing permissions and
- | limitations under the License.
- -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Service Qualifier</title>
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/esri/css/esri.css" />
-    <link rel="stylesheet" type="text/css" href="index.css" />
-    <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.7/js/dojo/dijit/themes/claro/claro.css" />
-    <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.7/js/esri/dijit/css/Popup.css" />
-    <link rel="stylesheet" type="text/css" href="css/noir.css" />
-   
-    <style type="text/css">
-        .dijitDialogPaneContentArea
-        {
-            color: #6e6e6e;
-        }
-        
-        .dijitDialogUnderlay
-        {
-            background: none repeat scroll 0 0 #000000;
-            opacity: 0.8;
-        }
-        
-      
-    </style>
-    <!-- Dojo Config -->
-    <script type="text/javascript">var djConfig = {
-parseOnLoad: true,
-    packages: [
-        { name: "app", location: location.pathname.replace(/\/[^/]+$/, "") }
-    ]
-};</script>
-    <!-- ArcGIS JavaScript API -->
-    <script type="text/javascript" src="http://js.arcgis.com/3.7compact"></script>
-    <!-- Supporting Javascript Files -->
-    <script type="text/javascript" src="javascript/config.js"></script>
-    <script type="text/javascript" src="javascript/app.js"></script>
-    <script type="text/javascript" src="javascript/portal.js"></script>
+    <title>Service Qualification</title>
+    <meta charset="utf-8">
+    <!--Use protocol relative urls that way if the browser is viewing the page via HTTPS the js/css file will be requested using the HTTPS protocol-->
+    <link rel="stylesheet" href="//js.arcgis.com/3.7/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.7/js/esri/css/esri.css">
+    <!--Load any application specific styles-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    
+</head>
+
+<body class="claro">
+    <div id="appLayout" class="appLayout" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'sidebar'">
+        <div class="edgePanelCenter" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'">
+
+            <div id="loader">
+                <img src="images/preloader.gif" />
+
+            </div>
+
+            <div id="searchDiv"></div>
+
+
+            <div id="mapDiv" dir="ltr"></div>
+
+            <div id="LocateButton"></div>
+            <div class="traceButtonNotPressed" id="traceButton">
+            </div>
+
+        </div>
+        <div class="edgePanelTop" id="titleblock" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'top'">Service Qualification</div>
+        <div class="edgePanelBottom" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'bottom'">
+            <div id="searchPanel" class="appLayout" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'sidebar'">
+
+                <div id="searchPanelLeft" class="searchPanelLeft" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'left'">
+
+                    <div id="searchTab" class="panelSearchTab">
+
+                        <label for="panelListTitle" id="searchfor">Find Nearest: </label>
+
+                        <div id="findType" class="userControls">
+                        </div>
+
+                        <br />
+                        <br />
+                        <label for="businessInfluenceVal" id="businflu">Business Influence: </label>
+                        <div id="businessInfluenceVal" class="userControlsText" data-dojo-type="dijit/form/TextBox" data-dojo-props="readOnly:true">
+                        </div>
+
+                      
+                    <br /><br />
+                        <input id="businessInfluenceSlider" class="userControls" type="range"
+                            data-dojo-type="dijit.form.HorizontalSlider"
+                            data-dojo-props="minimum: 0,maximum: 100,value: 0,showButtons: false,discreteValues: 101,showButtons:'true'">
+                        <!-- <input id="businessInfluenceSlider" class="userControls" data-dojo-type="dijit/form/HorizontalSlider" data-dojo-props="
+						  minimum:0, value:0, maximum:100, showButtons:'true',
+						  intermediateChanges:'false', slideDuration:'0'">
+                        </input>-->
+
+
+                    </div>
+                </div>
+
+                <div class="searchPanelCenter" id="searchPanelCenter" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'">
+                    <div id="panelSignal" class="panelResultsTab">
+                        <div id="titleSignal" class="panelTitle">
+                            Route Length
+                        </div>
+                        <div id="infoSignal" class="panelInfo">
+                            0
+                        </div>
+
+                    </div>
+                    <div class="panelBreak">
+                        <img src="images/break.png" />
+
+                    </div>
+
+                    <div id="panelFeatures" class="panelResultsTab">
+                        <div id="titleFeatures" class="panelTitle">
+                            Businesses Passed
+                        </div>
+                        <div id="infoFeatures" class="panelInfo">
+                            0
+                        </div>
+                    </div>
+                    <!--<div id="resultsContainer" class="appLayout" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'headline'">
+
+                        <div class="resultsPanelLeft" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'left'">
+                            <label for="routeLength" id="routeLengthLabel">Route Center</label>
+
+                            <div id="routeLength" class="userControls">
+                            </div>
+                        </div>
+                        <div class="resultsPanelCenter" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'center'">left</div>
+                        <!--<div class="appLayout" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'right'">Right</div>-->
+
+                </div>
+                -->
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- load dojo -->
+    <script type="text/javascript">
+        var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+        var dojoConfig = {
+            // The locationPath logic below may look confusing but all its doing is 
+            // enabling us to load the api from a CDN and load local modules from the correct location.
+            packages: [{
+                name: "application",
+                location: package_path + '/js'
+            }, {
+                name: "config",
+                location: package_path + '/config'
+            }]
+        };
+    </script>
+
+    <script type="text/javascript" src="//js.arcgis.com/3.7/"></script>
     <script type="text/javascript">
 
-        dojo.require("dijit.layout.BorderContainer");
-        dojo.require("dijit.layout.ContentPane");
-        dojo.require("dijit.form.HorizontalSlider");
-        dojo.require("dijit.form.Select");
+        require(["dojo/parser",
+                 "dijit/layout/BorderContainer",
+                 "dijit/layout/ContentPane",
+                 "dijit/layout/StackContainer",
+                 "dijit/layout/StackController",
+                 "dijit/form/Select",
+                 "dijit/form/HorizontalSlider",
+                 
+                 "dijit/form/HorizontalRuleLabels",
+                 "dijit/form/HorizontalRule",
+                 
+                 "dijit/form/TextBox",
 
-        dojo.require("esri.map");
-        dojo.require("esri.arcgis.utils");
-        dojo.require("esri.layers.FeatureLayer");
-        dojo.require("esri.tasks.query");
-        dojo.require("esri.utils");
-        dojo.require("esri.dijit.Popup");
-        //		dojo.require("esri.IdentityManager");
-        dojo.require("esri.dijit.Geocoder");
-        dojo.require("esri.tasks.closestfacility");
-        dojo.require("esri.tasks.DataFile");
-        dojo.require("esri.tasks.geometry");
-        dojo.require("esri.tasks.BufferParameters");
-        dojo.require("esri.dijit.PopupMobile");
-        dojo.require("esri.layers.agstiled");
+                 "dojo/domReady!"],
+                 function (parser) {
+                     parser.parse();
+                 });
 
-        
-        dojo.require("esri.arcgis.Portal");
-        dojo.require("app.OAuthHelper");
+        require([
+            "dojo/on",
+            "application/main",
+            "application/template",
+            "dojo/domReady!"
+        ], function (
+            on,
+            Main,
+            Template
+        ) {
+            //create the template. This will take care of all the logic required for template applications 
+            //If you need localization set the supportsLocalization value to true to get the localized strings 
+            //from the javascript/nls/resource files. 
+            //Note that we've included a placeholder nls folder and a resource file with one error string
+            //to show how to setup the strings file.
+           
+            var supportsLocalization = true; //defaults to true
 
-      
+            var myTemplate = new Template(supportsLocalization);
+
+            on(myTemplate, "ready", function (config) {
+                esri.config.defaults.io.corsEnabledServers.push("tryitlive.arcgis.com");
+                esri.config.defaults.io.corsEnabledServers.push("54.214.169.132");
+
+                //The config object contains the following properties: helper services, (optionally) 
+                //i18n, appid, webmap and any custom values defined by the application. 
+                //In this example we have one called theme. 
+                Main(config);
+            });
+        });
     </script>
-   
-</head>
-<body class="claro">
-    <!-- Panel Center -->
-    <div id="panelCenter" dojotype="dijit.layout.BorderContainer" style="width: 100%;
-        position: absolute; top: 0px; bottom: 200px; margin: 0; padding: 0">
-        <div id="loader">
-        </div>
-        <div id="map" dojotype="dijit.layout.ContentPane" region="center" style="width: 100%;
-            height: 100%;">
-        </div>
-    </div>
-    <!-- PanelBasemap -->
-    <div id="panelBasemap" onclick="toggleBasemap()">
-        Satellite
-    </div>
-    
-    <!-- Panel Container -->
-    <div id="panelContainer">
-        <div id="panelBG">
-        </div>
-        <!-- Panel Search -->
-        <div id="panelSearch">
-            <div id="search-bar">
-                <div id="title">
-                    Service Qualifier</div>
-                <div id="search-box">
-                    <input id="search-input" placeholder="Search" type="text">
-                    <!--input id="search-input" placeholder="Search" type="text" onkeydown="searchKeydown(event);"-->
-                    <!--input id="search-input" placeholder="Search" type="text" onkeydown="searchKeydown(event);"-->
-                    <button id="search-button" onclick="mapClickLocate();">
-                    </button>
-                </div>
-                <div id='ControlPanel'>
-                    <div id="panelListSubTitle" class="panelListSubTitle">
-                        Find Nearest</div>
-                    <div id="panelListTitle" class="panelListTitle">
-                        <select id="findType" data-dojo-type="dijit.form.Select">
-                        </select>
-                    </div>
-                    <div id='businessInfluenceText'>
-                        Business Influence:</div>
-                    <div id="businessInfluenceSlider" data-dojo-type="dijit.form.HorizontalSlider" data-dojo-props="
-						  minimum:0, value:0, maximum:100, showButtons:'true',
-						  intermediateChanges:'false', slideDuration:'0'" onmouseup="setKFactor();" onchange="setKFactor();">
-                    </div>
-                    <input id="businessInfluenceVal" placeholder="0" type="text" readonly="true">
-                    <button id="calcRouteButton" onclick="calculateSolution();">
-                        Calculate</button>
-                </div>
-            </div>
-        </div>
-        <!-- Panel Results -->
-        <div id="panelResults" class="scroll-pane">
-            <div id="panelSignal" class="panelResultsTab">
-                <div id="titleSignal" class="panelTitle">
-                    Route Length
-                </div>
-                <div id="infoSignal" class="panelInfo">
-                    &nbsp;
-                </div>
-                <div id="panelBarsBG">
-                </div>
-                <div id="panelBars">
-                </div>
-            </div>
-            <div class="panelBreak">
-            </div>
-            <div id="panelFeatures" class="panelResultsTab">
-                <div id="titleFeatures" class="panelTitle">
-                    Businesses Passed
-                </div>
-                <div id="infoFeatures" class="panelInfo">
-                    &nbsp;
-                </div>
-            </div>
-        </div>
-    </div>
+
 </body>
 </html>

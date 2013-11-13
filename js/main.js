@@ -108,13 +108,47 @@ function (
             dojo.byId('businessInfluenceVal').value = 0;
 
             control = dojo.byId("businessInfluenceSlider");
-            dojo.connect(control, "onmouseup", function (evt) {
+         
+            dojo.connect(control, "onmouseup", lang.hitch(this,function (evt) {
                 dojo.byId('businessInfluenceVal').value = dojo.number.round(dijit.byId('businessInfluenceSlider').value);
-            });
-            dojo.connect(control, "onchange", function (evt) {
-                dojo.byId('businessInfluenceVal').value = dojo.number.round(dijit.byId('businessInfluenceSlider').value);
-            });
+                if (this.locGraphic != null) {
+                    this._addToMap(this.locGraphic.geometry);
+                }
+            }));
+     
+           
+
             dojo.connect(dojo.byId('traceButton'), 'onclick', lang.hitch(this, function () {
+
+                this._toggleTool();
+
+            }));
+
+
+
+        },
+        _toggleTool: function (forceState) {
+            if (forceState == true)
+            {
+                this.acticeTrace = true;
+              
+                    document.getElementById("traceButton").className = "traceButtonPressed";
+                    this.toolbar.activate(Draw.POINT);
+
+                
+            }
+            else if (forceState == false)
+            {
+                this.acticeTrace = false;
+               
+           
+              
+                    document.getElementById("traceButton").className = "traceButtonNotPressed";
+                    this.toolbar.deactivate();
+
+          
+            }
+            else {
                 this.acticeTrace = !this.acticeTrace;
                 if (this.acticeTrace == true) {
 
@@ -127,11 +161,7 @@ function (
                     this.toolbar.deactivate();
 
                 }
-
-
-            }));
-
-
+            }
         },
         _createLocatorButton: function () {
             this.geoLocate = new LocateButton({
@@ -184,11 +214,7 @@ function (
         _initGraphic: function () {
 
 
-            this.editSymbol = new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_PATH).setPath("M16,22.375L7.116,28.83l3.396-10.438l-8.883-6.458l10.979,0.002L16.002,1.5l3.391,10.434h10.981l-8.886,6.457l3.396,10.439L16,22.375L16,22.375z").setSize(24).setColor(new dojo.Color([255, 0, 0]));
-            this.editSymbol.setOutline(new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_PATH).setPath("M16,22.375L7.116,28.83l3.396-10.438l-8.883-6.458l10.979,0.002L16.002,1.5l3.391,10.434h10.981l-8.886,6.457l3.396,10.439L16,22.375L16,22.375zM22.979,26.209l-2.664-8.205l6.979-5.062h-8.627L16,4.729l-2.666,8.206H4.708l6.979,5.07l-2.666,8.203L16,21.146L22.979,26.209L22.979,26.209z").setSize(26).setColor(new dojo.Color([0, 255, 0])));
-
-            this.editSymbolAvailable = new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_PATH).setPath("M16,22.375L7.116,28.83l3.396-10.438l-8.883-6.458l10.979,0.002L16.002,1.5l3.391,10.434h10.981l-8.886,6.457l3.396,10.439L16,22.375L16,22.375z").setSize(24).setColor(new dojo.Color([0, 255, 0]));
-            this.editSymbolAvailable.setOutline(new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_PATH).setPath("M16,22.375L7.116,28.83l3.396-10.438l-8.883-6.458l10.979,0.002L16.002,1.5l3.391,10.434h10.981l-8.886,6.457l3.396,10.439L16,22.375L16,22.375zM22.979,26.209l-2.664-8.205l6.979-5.062h-8.627L16,4.729l-2.666,8.206H4.708l6.979,5.07l-2.666,8.203L16,21.146L22.979,26.209L22.979,26.209z").setSize(26).setColor(new dojo.Color([0, 255, 0])));
+            this.editSymbol = new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_PATH).setPath("M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z").setSize(28).setColor(new dojo.Color([255, 0, 0]));
 
 
 
@@ -197,6 +223,8 @@ function (
             this._addToMap(evt.geometry);
         },
         _addToMap: function (point) {
+            this.map.infoWindow.hide();
+
             dojo.style("loader", "display", "block");
 
             this.map.graphics.clear();
@@ -307,6 +335,7 @@ function (
 
 
                             this._queryBusinessData(bufferedGeometries[0]);
+
                         }));
                         geomDeferred.addErrback(lang.hitch(this, function (error) {
                             console.log(error);
@@ -360,7 +389,7 @@ function (
             var query = new esri.tasks.Query();
             query.geometry = geometry;
 
-      
+
 
             var queryDef = this.businessLayerWebMap.layerObject.queryIds(query);
 
@@ -370,16 +399,17 @@ function (
                 dojo.byId("infoFeatures").innerHTML = results.length;
 
                 businessObjectids = results;
-                this.businessLayerWebMap.layerObject=  this.businessLayerWebMap.layerObject.setDefinitionExpression("OBJECTID IN \(" + businessObjectids.toString() + "\)")
+                this.businessLayerWebMap.layerObject = this.businessLayerWebMap.layerObject.setDefinitionExpression("OBJECTID IN \(" + businessObjectids.toString() + "\)")
                 this.businessLayerWebMap.layerObject.show();
-             
+
                 dojo.style("loader", "display", "none");
+                this._toggleTool(false);
 
             }));
             queryDef.addErrback(lang.hitch(this, function (results) {
 
                 alert(this.config.i18n.error.errorBufferBusiness);
-                
+
                 console.log("error: " + results);
                 dojo.style("loader", "display", "none");
 
@@ -390,14 +420,13 @@ function (
             try {
                 console.log("solveNetworkRoute()...");
 
-                this.map.infoWindow.hide();
 
                 this._clearRoute();
 
                 this.businessLayerWebMap.layerObject.setDefinitionExpression("");
-               // this.businessLayerWebMap.layerObject.clear();
+                // this.businessLayerWebMap.layerObject.clear();
                 this.businessLayerWebMap.layerObject.setVisibility(false);
-               
+
 
                 this.map.graphics.remove(this.bufferGraphic);
 
@@ -488,6 +517,7 @@ function (
             if (ext) {
                 this.map.setExtent(ext.expand(1.5));
             }
+
         },
 
         _initMap: function () {
@@ -544,6 +574,13 @@ function (
                 maxHeight: -1
             }, "findType");
             sel.startup();
+            sel.on('change', lang.hitch(this, function () {
+
+                if (this.locGraphic != null) {
+                    this._addToMap(this.locGraphic.geometry);
+                }
+
+            }));
 
 
 

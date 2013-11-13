@@ -19,7 +19,7 @@ define({
             searchFor: "Find Nearest: ",
             busInflu: "Business Influence: ",
             routeLen: "Route Length: ",
-            busCnt: "Business Influence: "
+            busCnt: "Businesses Passed: "
 
         },
         page:

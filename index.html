@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.7/js/esri/css/esri.css">
     <!--Load any application specific styles-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    
 </head>
 
 <body class="claro">
@@ -49,11 +48,17 @@
                         <div id="businessInfluenceVal" class="userControlsText" data-dojo-type="dijit/form/TextBox" data-dojo-props="readOnly:true">
                         </div>
 
-                      
-                    <br /><br />
-                        <input id="businessInfluenceSlider" class="userControls" type="range"
+
+                        <br />
+                        <br />
+                        <div id="businessInfluenceSlider" class="userControls" 
                             data-dojo-type="dijit.form.HorizontalSlider"
-                            data-dojo-props="minimum: 0,maximum: 100,value: 0,showButtons: false,discreteValues: 101,showButtons:'true'">
+                            data-dojo-props="minimum: 0,maximum: 100,value: 0,discreteValues: 101,showButtons:'true',slideDuration:'0',intermediateChanges:'true'">
+                            <script type="dojo/method" data-dojo-event="onChange" data-dojo-args="value">
+                            
+                                 dojo.byId("businessInfluenceVal").value = value;
+                            </script>
+                        </div>
                         <!-- <input id="businessInfluenceSlider" class="userControls" data-dojo-type="dijit/form/HorizontalSlider" data-dojo-props="
 						  minimum:0, value:0, maximum:100, showButtons:'true',
 						  intermediateChanges:'false', slideDuration:'0'">
@@ -131,10 +136,6 @@
                  "dijit/layout/StackController",
                  "dijit/form/Select",
                  "dijit/form/HorizontalSlider",
-                 
-                 "dijit/form/HorizontalRuleLabels",
-                 "dijit/form/HorizontalRule",
-                 
                  "dijit/form/TextBox",
 
                  "dojo/domReady!"],
@@ -157,7 +158,7 @@
             //from the javascript/nls/resource files. 
             //Note that we've included a placeholder nls folder and a resource file with one error string
             //to show how to setup the strings file.
-           
+
             var supportsLocalization = true; //defaults to true
 
             var myTemplate = new Template(supportsLocalization);

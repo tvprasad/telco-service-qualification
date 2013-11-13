@@ -132,6 +132,6 @@
         "attributeName": "LengthToBusinessRatio",
         "parameterName": "Business Influence",
         "defaultCutoff": 25000000,
-        "appTitle": "Service Qualification"
+        "appTitle": "Service Feasibility"
     }
 }

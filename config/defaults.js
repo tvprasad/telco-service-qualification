@@ -5,7 +5,7 @@ define([], function () {
     var defaults = {
         "appid": "",
         "webmap": "6365265583104716abbed804efa4b705", // 
-        "oauthappid": null, //"AFTKRmv16wj14N3z",
+        "oauthappid": null, //"",
         //Group templates must support a group url parameter. This will contain the id of the group. 
         //group: "",
         //Enter the url to the proxy if needed by the applcation. See the 'Using the proxy page' help topic for details

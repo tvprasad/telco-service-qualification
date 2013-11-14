@@ -145,6 +145,8 @@ function (
 
             html.set(dojo.byId("titleFeatures"), this.config.i18n.ui.busCnt);
 
+            dijit.byId("basemapTitle").set("title", this.config.i18n.ui.basemapButton);
+
             dojo.byId('businessInfluenceVal').value = 0;
 
             control = dojo.byId("businessInfluenceSlider");

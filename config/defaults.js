@@ -34,7 +34,7 @@ define([], function () {
         "bufferDistance": 500,
         "facilitySearchDistance": 20000,
 
-        "geometryUrl": "http://54.214.169.132:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer",
+        "geometryUrl": "",
 
         // Network Analyst Configuration
         "closestFacilityURL": "http://54.214.169.132:6080/arcgis/rest/services/ServiceQualificationRoute/NAServer/Closest%20Facility",

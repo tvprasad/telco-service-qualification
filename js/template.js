@@ -1,3 +1,20 @@
+/** @license
+ | Version 10.2
+ | Copyright 2013 Esri
+ |
+ | Licensed under the Apache License, Version 2.0 (the "License");
+ | you may not use this file except in compliance with the License.
+ | You may obtain a copy of the License at
+ |
+ |    http://www.apache.org/licenses/LICENSE-2.0
+ |
+ | Unless required by applicable law or agreed to in writing, software
+ | distributed under the License is distributed on an "AS IS" BASIS,
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ | See the License for the specific language governing permissions and
+ | limitations under the License.
+ */
+
 define([
     "dojo/Evented",
     "dojo/parser",
@@ -213,6 +230,25 @@ function(
                 if (this.config.helperServices && this.config.helperServices.geometry && this.config.helperServices.geometry.url) {
                     esriConfig.defaults.geometryService = new GeometryService(this.config.helperServices.geometry.url);
                 }
+              
+                var header = {};
+                var lines = response.basemapGalleryGroupQuery.split(/[\r\n]/);
+                array.forEach(lines, function (line) {
+                    var parts = line.split("AND");
+                    if (parts.length > 0) {
+                        array.forEach(parts, function (tags) {
+                            var subparts = tags.split(":");
+                            header[lang.trim(subparts[0])] = lang.trim(subparts [1]);
+                        });
+                    }
+                    
+        
+                }, this);
+            
+                this.config.basemapGalleryGroupQuery = header;
+
+               
+
                 deferred.resolve();
             }), function(error) {
                 console.log(error);

@@ -1,3 +1,20 @@
+/** @license
+ | Version 10.2
+ | Copyright 2013 Esri
+ |
+ | Licensed under the Apache License, Version 2.0 (the "License");
+ | you may not use this file except in compliance with the License.
+ | You may obtain a copy of the License at
+ |
+ |    http://www.apache.org/licenses/LICENSE-2.0
+ |
+ | Unless required by applicable law or agreed to in writing, software
+ | distributed under the License is distributed on an "AS IS" BASIS,
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ | See the License for the specific language governing permissions and
+ | limitations under the License.
+ */
+
 define([
     "dojo/ready",
     "dojo/_base/declare",
@@ -25,7 +42,8 @@ define([
     "esri/tasks/ClosestFacilityParameters",
     "esri/tasks/FeatureSet",
     "dijit/form/Button",
-     "esri/layers/FeatureLayer"
+     "esri/layers/FeatureLayer",
+     "esri/dijit/BasemapGallery"
 
 ],
 function (
@@ -55,7 +73,8 @@ function (
     ClosestFacilityParameters,
         FeatureSet,
         Button,
-        FeatureLayer
+        FeatureLayer,
+        BasemapGallery
 ) {
     return declare("", null, {
         config: {},
@@ -78,7 +97,8 @@ function (
             console.log('Geocder Created');
             this._initGraphic();
             console.log('Graphics Created');
-
+            this._createBaseMapGallery()
+            console.log('Basemap Created');
             this._initMap();
             console.log('Map Initilized');
             this._createToolbar();
@@ -88,6 +108,26 @@ function (
             dojo.style("loader", "display", "none");
             console.log('Loader Hidden');
 
+        },
+        _createBaseMapGallery: function () {
+            if (this.config.basemapGalleryGroupQuery) {
+                this.basemapGallery = new BasemapGallery({
+                    basemap: this.config.basemapGalleryGroupQuery,
+                    map: this.map
+                }, "basemapGallery");
+            }
+            else {
+                this.basemapGallery = new BasemapGallery({
+                    showArcGISBasemaps: true,
+                    map: this.map
+                }, "basemapGallery");
+            }
+
+            this.basemapGallery.startup();
+
+            this.basemapGallery.on("error", function (msg) {
+                console.log("basemap gallery error:  ", msg);
+            });
         },
         _initPage: function () {
 
@@ -108,15 +148,15 @@ function (
             dojo.byId('businessInfluenceVal').value = 0;
 
             control = dojo.byId("businessInfluenceSlider");
-         
-            dojo.connect(control, "onmouseup", lang.hitch(this,function (evt) {
+
+            dojo.connect(control, "onmouseup", lang.hitch(this, function (evt) {
                 dojo.byId('businessInfluenceVal').value = dojo.number.round(dijit.byId('businessInfluenceSlider').value);
                 if (this.locGraphic != null) {
                     this._addToMap(this.locGraphic.geometry);
                 }
             }));
-     
-           
+
+
 
             dojo.connect(dojo.byId('traceButton'), 'onclick', lang.hitch(this, function () {
 
@@ -128,25 +168,23 @@ function (
 
         },
         _toggleTool: function (forceState) {
-            if (forceState == true)
-            {
+            if (forceState == true) {
                 this.acticeTrace = true;
-              
-                    document.getElementById("traceButton").className = "traceButtonPressed";
-                    this.toolbar.activate(Draw.POINT);
 
-                
+                document.getElementById("traceButton").className = "traceButtonPressed";
+                this.toolbar.activate(Draw.POINT);
+
+
             }
-            else if (forceState == false)
-            {
+            else if (forceState == false) {
                 this.acticeTrace = false;
-               
-           
-              
-                    document.getElementById("traceButton").className = "traceButtonNotPressed";
-                    this.toolbar.deactivate();
 
-          
+
+
+                document.getElementById("traceButton").className = "traceButtonNotPressed";
+                this.toolbar.deactivate();
+
+
             }
             else {
                 this.acticeTrace = !this.acticeTrace;
@@ -265,7 +303,14 @@ function (
         _bufferGeometries: function (geometries, distances, units, wkid) {
             console.log("bufferGeometries()...");
             var params = new BufferParameters();
-            var gsvc = new GeometryService(this.config.geometryUrl);
+            var gsvc ;
+            if (this.config.geometryUrl == null || this.config.geometryUrl == "") {
+                gsvc = esriConfig.defaults.geometryService;
+            }
+            else {
+                gsvc = new GeometryService(this.config.geometryUrl);
+            }
+
 
             params.distances = distances;
             params.bufferSpatialReference = this.map.spatialReference;//new esri.SpatialReference({ wkid: wkid });

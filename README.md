@@ -70,12 +70,9 @@ Esri does not require you to assign the copyright of your contributions, you ret
 
 If appropriate, include the Apache 2.0 license summary at the top of each file along with the copyright info. If you are adding a new file that you wrote, include your name in the copyright notice in the license summary at the top of the file.
 
-### License Summary
+## Licensing
 
-You can copy and paste the Apache 2.0 license summary from below.
-
-```
-Copyright 2013 by Esri
+Copyright 2013 Esri
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -88,11 +85,9 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-```
 
-### Contributing code written by others
+A copy of the license is available in the repository's
+[LICENSE.txt](https://raw.github.com/Esri/configurable-place-finder/master/LICENSE.txt) file.
 
-Please do not contribute code you did not write yourself, unless you are certain you have the legal ability to do so. Also ensure all code contributed can be licensed under the Apache License 2.0.
-
-[](Esri Tags: Telecommunications Utilities)
+[](Esri Tags: Telecommunications Utilities Service Qualification)
 [](Esri Language: JavaScript)​

@@ -22,7 +22,19 @@
             <div id="searchDiv"></div>
 
 
-            <div id="mapDiv" dir="ltr"></div>
+            <div id="mapDiv" dir="ltr">
+                <div class="basemapButton">
+                    <div data-dojo-type="dijit/TitlePane" data-dojo-props="title:'Switch Basemap', closable:false,  open:false" id="basemapTitle"  class="" >
+                        <div data-dojo-type="dijit/layout/ContentPane" style="width: 380px; height: 280px; overflow: auto;">
+                            <div id="basemapGallery">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
             <div id="LocateButton"></div>
             <div class="traceButtonNotPressed" id="traceButton">
@@ -51,7 +63,7 @@
 
                         <br />
                         <br />
-                        <div id="businessInfluenceSlider" class="userControls" 
+                        <div id="businessInfluenceSlider" class="userControls"
                             data-dojo-type="dijit.form.HorizontalSlider"
                             data-dojo-props="minimum: 0,maximum: 100,value: 0,discreteValues: 101,showButtons:'true',slideDuration:'0',intermediateChanges:'true'">
                             <script type="dojo/method" data-dojo-event="onChange" data-dojo-args="value">
@@ -132,6 +144,7 @@
         require(["dojo/parser",
                  "dijit/layout/BorderContainer",
                  "dijit/layout/ContentPane",
+                  "dijit/TitlePane",
                  "dijit/layout/StackContainer",
                  "dijit/layout/StackController",
                  "dijit/form/Select",

@@ -170,6 +170,8 @@ function (
 
         },
         _toggleTool: function (forceState) {
+            if (this.toolbar == null) return;
+
             if (forceState == true) {
                 this.acticeTrace = true;
 
@@ -191,7 +193,7 @@ function (
             else {
                 this.acticeTrace = !this.acticeTrace;
                 if (this.acticeTrace == true) {
-
+                    
                     document.getElementById("traceButton").className = "traceButtonPressed";
                     this.toolbar.activate(Draw.POINT);
 
@@ -298,6 +300,9 @@ function (
             }));
             geomDeferred.addErrback(lang.hitch(this, function (error) {
                 this._onBufferLocationError(error);
+
+                dojo.style("loader", "display", "none");
+
             }));
 
 

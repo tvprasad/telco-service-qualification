@@ -4,13 +4,13 @@ define([], function () {
     //and url parameters.
     var defaults = {
         "appid": "",
-        "webmap": "6365265583104716abbed804efa4b705", // 
+        "webmap": "", // 
         "oauthappid": null, //"",
         //Group templates must support a group url parameter. This will contain the id of the group. 
         //group: "",
         //Enter the url to the proxy if needed by the applcation. See the 'Using the proxy page' help topic for details
         //http://developers.arcgis.com/en/javascript/jshelp/ags_proxy.html
-        "proxyurl": "http://tryitlive.arcgis.com/servicequalification/auth_proxy.ashx",
+        "proxyurl": "http://<yourserver>/proxy/auth_proxy.ashx",
         //Example of a template specific property. If your template had several color schemes
         //you could define the default here and setup configuration settings to allow users to choose a different
         //color theme.  
@@ -37,7 +37,7 @@ define([], function () {
         "geometryUrl": "",
 
         // Network Analyst Configuration
-        "closestFacilityURL": "http://54.214.169.132:6080/arcgis/rest/services/ServiceQualificationRoute/NAServer/Closest%20Facility",
+        "closestFacilityURL": "http://<yourserver>/arcgis/rest/services/ServiceQualificationRoute/NAServer/Closest%20Facility",
         "impedanceAttribute": "LengthToBusinessRatio",
         "attributeName": "LengthToBusinessRatio",
         "parameterName": "Business Influence",

@@ -63,7 +63,7 @@ function(
             //config will contain application and user defined info for the application such as i18n strings, 
             //the web map id and application id, any url parameters and any application specific configuration
             // information. 
-            lang.mixin(defaults, commonConfig);
+            declare.safeMixin(defaults, commonConfig);
 
             this.config = defaults;
             this.localize = supportsLocalization || false;
@@ -228,16 +228,8 @@ function(
                 },
                 callbackParamName: "callback"
             }).then(lang.hitch(this, function(response) {
-                if (this.config.helperServices == null) {
-                    this.config.helperServices = {};
-                    lang.mixin(this.config.helperServices, response.helperServices);
-                }
-                else {
-                    lang.mixin(response.helperServices, this.config.helperServices);
-                    this.config.helperServices = response.helperServices;
 
-
-                }
+                declare.safeMixin(this.config.helperServices || {}, response.helperServices);
 
                 lang.mixin(this.config.helperServices, response.helperServices);
                 //Let's set the geometry helper service to be the app default.  

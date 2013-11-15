@@ -4,18 +4,18 @@ define([], function () {
     //and url parameters.
     var defaults = {
         "appid": "",
-        "webmap": "", // 
+        "webmap": "6365265583104716abbed804efa4b705", // 
         "oauthappid": null, //"",
         //Group templates must support a group url parameter. This will contain the id of the group. 
         //group: "",
         //Enter the url to the proxy if needed by the applcation. See the 'Using the proxy page' help topic for details
         //http://developers.arcgis.com/en/javascript/jshelp/ags_proxy.html
-        "proxyurl": "http://<yourserver>/proxy/auth_proxy.ashx",
+        "proxyurl": "http://localhost/proxy/auth_proxy.ashx",
         //Example of a template specific property. If your template had several color schemes
         //you could define the default here and setup configuration settings to allow users to choose a different
         //color theme.  
         "theme": "none",
-        "bingmapskey": "", //Enter the url to your organizations bing maps key if you want to use bing basemaps
+        "bingMapsKey": "", //Enter the url to your organizations bing maps key if you want to use bing basemaps
         "sharinghost": location.protocol + "//" + "www.arcgis.com", //Defaults to arcgis.com. Set this value to your portal or organization host name. 
 
         "businessesLayerName": "Businesses",
@@ -34,10 +34,10 @@ define([], function () {
         "bufferDistance": 500,
         "facilitySearchDistance": 20000,
 
-        "geometryUrl": "",
+        "geometryUrl": "http://localhost:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer",
 
         // Network Analyst Configuration
-        "closestFacilityURL": "http://<yourserver>/arcgis/rest/services/ServiceQualificationRoute/NAServer/Closest%20Facility",
+        "closestFacilityURL": "http://localhost:6080/arcgis/rest/services/ServiceQualificationRoute/NAServer/Closest%20Facility",
         "impedanceAttribute": "LengthToBusinessRatio",
         "attributeName": "LengthToBusinessRatio",
         "parameterName": "Business Influence",

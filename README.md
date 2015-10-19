@@ -1,4 +1,6 @@
-﻿# telco-service-qualification
+#Replacement Notice
+This app has been replaced with the [Service Feasbility] (https://github.com/Esri/solutions-webappbuilder-widgets/tree/master/ServiceFeasibility) widget and Web AppBuilder for ArcGIS.
+#Service Qualification
 
 Service qualification for determining optimal routes to use when building out network infrastructure to new potential customer locations
 
@@ -31,7 +33,7 @@ Esri's sample data can be [downloaded] (http://www.arcgis.com/home/item.html?id=
 
 ## Resources
 
-Learn more about ArcGIS for Telecommunications Maps and App's [ArcGIS for Telecommunications Maps and App's](http://solutions.arcgis.com/telecom).
+Learn more about ArcGIS for Telecommunications Maps and App's [ArcGIS for Telecommunications Maps and App's](http://solutions.arcgis.com/telecommunications).
 
 Show me a list of other [Telecommuncations GitHub repositories](http://esri.github.io/#Telecommunications).
 
